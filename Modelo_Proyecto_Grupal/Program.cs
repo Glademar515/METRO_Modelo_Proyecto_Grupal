@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//program
+//MAIN DEL SISTEMA
 namespace Modelo_Proyecto_Grupal
 {
     internal class Program
