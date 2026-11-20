@@ -181,4 +181,69 @@ namespace Modelo_Proyecto_Grupal
             foreach (Producto p in PRIVcanasta)
             {
                 Console.WriteLine($"{p.Codigo,-10} | {p.Nombre,-26} | S/ {p.PrecioUnitario,-7:F2} | {p.Cantidad,-6} | S/ {p.Subtotal:F2}");
-                total += p.Subtotal
+                total += p.Subtotal;
+            }
+
+            Console.WriteLine("-------------------------------------------------------------------------");
+            Console.WriteLine($"TOTAL ACUMULADO PARCIAL: S/ {total:F2}");
+        }
+
+        public void OrdenarBurbujaPorPrecio()
+        {
+            if (PRIVcanasta.Count < 2)
+            {
+                Console.WriteLine("Faltan productos para ordenar.");
+                return;
+            }
+
+            for (int i = 0; i < PRIVcanasta.Count - 1; i++)
+            {
+                for (int j = 0; j < PRIVcanasta.Count - i - 1; j++)
+                {
+                    if (PRIVcanasta[j].PrecioUnitario > PRIVcanasta[j + 1].PrecioUnitario)
+                    {
+                        Producto aux = PRIVcanasta[j];
+                        PRIVcanasta[j] = PRIVcanasta[j + 1];
+                        PRIVcanasta[j + 1] = aux;
+                    }
+                }
+            }
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("-> Canasta ordenada por PRECIO UNITARIO (Burbuja).");
+            Console.ResetColor();
+        }
+
+        public void OrdenarSeleccionPorSubtotal()
+        {
+            if (PRIVcanasta.Count < 2)
+            {
+                Console.WriteLine("Faltan productos para ordenar.");
+                return;
+            }
+
+            for (int i = 0; i < PRIVcanasta.Count - 1; i++)
+            {
+                int mayor = i;
+                for (int j = i + 1; j < PRIVcanasta.Count; j++)
+                {
+                    if (PRIVcanasta[j].Subtotal > PRIVcanasta[mayor].Subtotal)
+                    {
+                        mayor = j;
+                    }
+                }
+
+                if (mayor != i)
+                {
+                    Producto aux = PRIVcanasta[i];
+                    PRIVcanasta[i] = PRIVcanasta[mayor];
+                    PRIVcanasta[mayor] = aux;
+                }
+            }
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("-> Canasta ordenada por SUBTOTAL (Selección).");
+            Console.ResetColor();
+        }
+    }
+}
