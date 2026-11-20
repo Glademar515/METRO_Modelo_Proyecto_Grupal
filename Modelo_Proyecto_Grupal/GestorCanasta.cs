@@ -8,20 +8,20 @@ namespace Modelo_Proyecto_Grupal
 {
     public class GestorCanasta
     {
-        private readonly List<Producto> PRIcatalogo = new List<Producto>
+        private readonly List<Producto> PRIVcatalogo = new List<Producto>
         {
             new Producto("101", "Agua San Mateo 600ml", 2.50, 1, false),
             new Producto("102", "Leche Gloria Azul 400g", 4.80, 1, false),
             new Producto("103", "Cerveza Cusqueña 330ml", 7.50, 1, true)
         };
 
-        private readonly List<Producto> PRIcanasta = new List<Producto>();
+        private readonly List<Producto> PRIVcanasta = new List<Producto>();
 
-        public List<Producto> Canasta => PRIcanasta;
+        public List<Producto> Canasta => PRIVcanasta;
 
         public void LimpiarCanasta()
         {
-            PRIcanasta.Clear();
+            PRIVcanasta.Clear();
         }
 
         public void MostrarCatalogoTienda()
@@ -30,7 +30,7 @@ namespace Modelo_Proyecto_Grupal
             Console.WriteLine("\n================== CATÁLOGO DE PRODUCTOS METRO ==================");
             Console.WriteLine($"{"CÓDIGO",-8} | {"PRODUCTO",-26} | {"PRECIO (S/)",-12} | {"RESTRICCIÓN"}");
             Console.WriteLine("-----------------------------------------------------------------");
-            foreach (Producto item in PRIcatalogo)
+            foreach (Producto item in PRIVcatalogo)
             {
                 string restriccion = item.RequiereEdad18 ? "Sí (+18)" : "Ninguna";
                 Console.WriteLine($"{item.Codigo,-8} | {item.Nombre,-26} | S/ {item.PrecioUnitario,-9:F2} | {restriccion}");
@@ -41,12 +41,12 @@ namespace Modelo_Proyecto_Grupal
 
         private Producto BuscarEnCatalogo(string codigo)
         {
-            return PRIcatalogo.Find(p => p.Codigo.Equals(codigo, StringComparison.OrdinalIgnoreCase));
+            return PRIVcatalogo.Find(p => p.Codigo.Equals(codigo, StringComparison.OrdinalIgnoreCase));
         }
 
         private int BuscarIndiceEnCanasta(string codigo)
         {
-            return PRIcanasta.FindIndex(p => p.Codigo.Equals(codigo, StringComparison.OrdinalIgnoreCase));
+            return PRIVcanasta.FindIndex(p => p.Codigo.Equals(codigo, StringComparison.OrdinalIgnoreCase));
         }
 
         public void RegistrarProductoEscaneado(ValidadorSeguridad validador)
@@ -76,14 +76,14 @@ namespace Modelo_Proyecto_Grupal
                 int indice = BuscarIndiceEnCanasta(codigo);
                 if (indice != -1)
                 {
-                    PRIcanasta[indice].Cantidad += cantidad;
+                    PRIVcanasta[indice].Cantidad += cantidad;
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("-> El producto ya estaba en la canasta. Se actualizó la cantidad.");
                     Console.ResetColor();
                 }
                 else
                 {
-                    PRIcanasta.Add(new Producto(
+                    PRIVcanasta.Add(new Producto(
                         productoCatalogo.Codigo,
                         productoCatalogo.Nombre,
                         productoCatalogo.PrecioUnitario,
@@ -105,7 +105,7 @@ namespace Modelo_Proyecto_Grupal
             int indice = BuscarIndiceEnCanasta(codigo);
             if (indice != -1)
             {
-                Producto p = PRIcanasta[indice];
+                Producto p = PRIVcanasta[indice];
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine($"[Encontrado] {p.Nombre} | Precio Unit: S/ {p.PrecioUnitario:F2} | Cant: {p.Cantidad} | Subtotal: S/ {p.Subtotal:F2}");
                 Console.ResetColor();
@@ -124,7 +124,7 @@ namespace Modelo_Proyecto_Grupal
             int indice = BuscarIndiceEnCanasta(codigo);
             if (indice != -1)
             {
-                Producto p = PRIcanasta[indice];
+                Producto p = PRIVcanasta[indice];
                 Console.WriteLine($"Producto: {p.Nombre} | Cantidad actual: {p.Cantidad}");
                 Console.Write("Ingrese la nueva cantidad: ");
 
@@ -154,7 +154,7 @@ namespace Modelo_Proyecto_Grupal
             int indice = BuscarIndiceEnCanasta(codigo);
             if (indice != -1)
             {
-                PRIcanasta.RemoveAt(indice);
+                PRIVcanasta.RemoveAt(indice);
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("-> Producto eliminado de la canasta.");
                 Console.ResetColor();
@@ -167,7 +167,7 @@ namespace Modelo_Proyecto_Grupal
 
         public void MostrarCanasta()
         {
-            if (PRIcanasta.Count == 0)
+            if (PRIVcanasta.Count == 0)
             {
                 Console.WriteLine("\n[Canasta vacía]");
                 return;
@@ -178,72 +178,7 @@ namespace Modelo_Proyecto_Grupal
             Console.WriteLine($"{"CÓDIGO",-10} | {"PRODUCTO",-26} | {"PRECIO",-10} | {"CANT.",-6} | {"SUBTOTAL"}");
             Console.WriteLine("-------------------------------------------------------------------------");
 
-            foreach (Producto p in PRIcanasta)
+            foreach (Producto p in PRIVcanasta)
             {
                 Console.WriteLine($"{p.Codigo,-10} | {p.Nombre,-26} | S/ {p.PrecioUnitario,-7:F2} | {p.Cantidad,-6} | S/ {p.Subtotal:F2}");
-                total += p.Subtotal;
-            }
-
-            Console.WriteLine("-------------------------------------------------------------------------");
-            Console.WriteLine($"TOTAL ACUMULADO PARCIAL: S/ {total:F2}");
-        }
-
-        public void OrdenarBurbujaPorPrecio()
-        {
-            if (PRIcanasta.Count < 2)
-            {
-                Console.WriteLine("Faltan productos para ordenar.");
-                return;
-            }
-
-            for (int i = 0; i < PRIcanasta.Count - 1; i++)
-            {
-                for (int j = 0; j < PRIcanasta.Count - i - 1; j++)
-                {
-                    if (PRIcanasta[j].PrecioUnitario > PRIcanasta[j + 1].PrecioUnitario)
-                    {
-                        Producto aux = PRIcanasta[j];
-                        PRIcanasta[j] = PRIcanasta[j + 1];
-                        PRIcanasta[j + 1] = aux;
-                    }
-                }
-            }
-
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("-> Canasta ordenada por PRECIO UNITARIO (Burbuja).");
-            Console.ResetColor();
-        }
-
-        public void OrdenarSeleccionPorSubtotal()
-        {
-            if (PRIcanasta.Count < 2)
-            {
-                Console.WriteLine("Faltan productos para ordenar.");
-                return;
-            }
-
-            for (int i = 0; i < PRIcanasta.Count - 1; i++)
-            {
-                int mayor = i;
-                for (int j = i + 1; j < PRIcanasta.Count; j++)
-                {
-                    if (PRIcanasta[j].Subtotal > PRIcanasta[mayor].Subtotal)
-                    {
-                        mayor = j;
-                    }
-                }
-
-                if (mayor != i)
-                {
-                    Producto aux = PRIcanasta[i];
-                    PRIcanasta[i] = PRIcanasta[mayor];
-                    PRIcanasta[mayor] = aux;
-                }
-            }
-
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("-> Canasta ordenada por SUBTOTAL (Selección).");
-            Console.ResetColor();
-        }
-    }
-}
+                total += p.Subtotal
