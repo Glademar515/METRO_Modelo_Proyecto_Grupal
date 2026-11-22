@@ -13,6 +13,7 @@ namespace Modelo_Proyecto_Grupal
             ValidadorSeguridad validador = new ValidadorSeguridad();
             GestorCanasta gestorCanasta = new GestorCanasta();
             ControladorPagos controladorPagos = new ControladorPagos();
+            FuncionesRecursivas funcionesRecursivas = new FuncionesRecursivas();
 
             int opcion;
             do
@@ -31,6 +32,8 @@ namespace Modelo_Proyecto_Grupal
                 Console.WriteLine("7. Ordenar canasta por Subtotal (Selección)");
                 Console.WriteLine("8. Procesar pago y emitir comprobante");
                 Console.WriteLine("9. Ver reporte de auditoría");
+                Console.WriteLine("10. Probar funciones recursivas (9.1)");
+                Console.WriteLine("11. Probar aplicación recursiva (9.2)");
                 Console.WriteLine("0. Salir");
                 Console.Write("Seleccione opción: ");
 
@@ -64,6 +67,12 @@ namespace Modelo_Proyecto_Grupal
                         break;
                     case 9:
                         controladorPagos.MostrarMatrizAuditoriaPagos();
+                        break;
+                    case 10:
+                        funcionesRecursivas.EjecutarDemo91();
+                        break;
+                    case 11:
+                        funcionesRecursivas.EjecutarDemo92(gestorCanasta.Canasta);
                         break;
                     case 0:
                         Console.WriteLine("Saliendo del sistema...");
