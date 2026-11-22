@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Modelo_Proyecto_Grupal
@@ -186,6 +187,58 @@ namespace Modelo_Proyecto_Grupal
 
             Console.WriteLine("-------------------------------------------------------------------------");
             Console.WriteLine($"TOTAL ACUMULADO PARCIAL: S/ {total:F2}");
+        }
+
+        private void MostrarMensajeInvalidoYResetear()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("\nOpción no válida");
+            for (int i = 0; i < 3; i++)
+            {
+                Thread.Sleep(500);
+                Console.Write(" .");
+            }
+            Console.ResetColor();
+            Thread.Sleep(500);
+            Console.Clear();
+        }
+
+        public void MenuOrdenarCanasta()
+        {
+            int opcionOrden;
+            do
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("\n================ ORDENAR CANASTA ================");
+                Console.ResetColor();
+                Console.WriteLine("1. Por Precio Unitario (Burbuja)");
+                Console.WriteLine("2. Por Subtotal (Selección)");
+                Console.WriteLine("3. Volver");
+                Console.Write("Elija método de ordenamiento: ");
+
+                if (!int.TryParse(Console.ReadLine(), out opcionOrden))
+                {
+                    MostrarMensajeInvalidoYResetear();
+                    opcionOrden = -1;
+                    continue;
+                }
+
+                switch (opcionOrden)
+                {
+                    case 1:
+                        OrdenarBurbujaPorPrecio();
+                        break;
+                    case 2:
+                        OrdenarSeleccionPorSubtotal();
+                        break;
+                    case 3:
+                        Console.WriteLine("Volviendo al menú principal...");
+                        break;
+                    default:
+                        MostrarMensajeInvalidoYResetear();
+                        break;
+                }
+            } while (opcionOrden != 3);
         }
 
         public void OrdenarBurbujaPorPrecio()

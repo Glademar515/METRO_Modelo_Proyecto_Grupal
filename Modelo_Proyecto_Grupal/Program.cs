@@ -2,12 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 //MAIN DEL SISTEMA
 namespace Modelo_Proyecto_Grupal
 {
     internal class Program
     {
+        private static void MostrarMensajeInvalidoYResetear()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("\nOpción no válida");
+            for (int i = 0; i < 3; i++)
+            {
+                Thread.Sleep(500);
+                Console.Write(" .");
+            }
+            Console.ResetColor();
+            Thread.Sleep(500);
+            Console.Clear();
+        }
+
         static void Main(string[] args)
         {
             ValidadorSeguridad validador = new ValidadorSeguridad();
@@ -28,16 +43,20 @@ namespace Modelo_Proyecto_Grupal
                 Console.WriteLine("3. Modificar cantidad de un producto");
                 Console.WriteLine("4. Eliminar producto de la canasta");
                 Console.WriteLine("5. Mostrar canasta actual");
-                Console.WriteLine("6. Ordenar canasta por Precio Unitario (Burbuja)");
-                Console.WriteLine("7. Ordenar canasta por Subtotal (Selección)");
-                Console.WriteLine("8. Procesar pago y emitir comprobante");
-                Console.WriteLine("9. Ver reporte de auditoría");
-                Console.WriteLine("10. Probar funciones recursivas (9.1)");
-                Console.WriteLine("11. Probar aplicación recursiva (9.2)");
+                Console.WriteLine("6. Ordenar canasta");
+                Console.WriteLine("7. Procesar pago y emitir comprobante");
+                Console.WriteLine("8. Ver reporte de auditoría");
+                Console.WriteLine("9. Probar funciones recursivas");
+                Console.WriteLine("10. Probar aplicación recursiva");
                 Console.WriteLine("0. Salir");
                 Console.Write("Seleccione opción: ");
 
-                if (!int.TryParse(Console.ReadLine(), out opcion)) opcion = -1;
+                if (!int.TryParse(Console.ReadLine(), out opcion))
+                {
+                    MostrarMensajeInvalidoYResetear();
+                    opcion = -1;
+                    continue;
+                }
 
                 switch (opcion)
                 {
@@ -57,28 +76,25 @@ namespace Modelo_Proyecto_Grupal
                         gestorCanasta.MostrarCanasta();
                         break;
                     case 6:
-                        gestorCanasta.OrdenarBurbujaPorPrecio();
+                        gestorCanasta.MenuOrdenarCanasta();
                         break;
                     case 7:
-                        gestorCanasta.OrdenarSeleccionPorSubtotal();
-                        break;
-                    case 8:
                         controladorPagos.ProcesarPagoYComprobante(gestorCanasta, validador);
                         break;
-                    case 9:
+                    case 8:
                         controladorPagos.MostrarMatrizAuditoriaPagos();
                         break;
-                    case 10:
+                    case 9:
                         funcionesRecursivas.EjecutarDemo91();
                         break;
-                    case 11:
+                    case 10:
                         funcionesRecursivas.EjecutarDemo92(gestorCanasta.Canasta);
                         break;
                     case 0:
                         Console.WriteLine("Saliendo del sistema...");
                         break;
                     default:
-                        Console.WriteLine("Opción no válida.");
+                        MostrarMensajeInvalidoYResetear();
                         break;
                 }
             } while (opcion != 0);
