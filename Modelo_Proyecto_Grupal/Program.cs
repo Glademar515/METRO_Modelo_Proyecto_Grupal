@@ -85,10 +85,10 @@ namespace Modelo_Proyecto_Grupal
                         controladorPagos.MostrarMatrizAuditoriaPagos();
                         break;
                     case 9:
-                        funcionesRecursivas.EjecutarDemo91();
+                        funcionesRecursivas.MenuFuncionesRecursivas();
                         break;
                     case 10:
-                        funcionesRecursivas.EjecutarDemo92(gestorCanasta.Canasta);
+                        funcionesRecursivas.MenuAplicacionRecursiva(gestorCanasta.Canasta);
                         break;
                     case 0:
                         Console.WriteLine("Saliendo del sistema...");

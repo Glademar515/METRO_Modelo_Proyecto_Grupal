@@ -107,7 +107,7 @@ namespace Modelo_Proyecto_Grupal
             Console.Clear();
         }
 
-        public void EjecutarDemo91()
+        public void MenuFuncionesRecursivas()
         {
             int subOpcion;
             do
@@ -180,7 +180,7 @@ namespace Modelo_Proyecto_Grupal
             } while (subOpcion != 4);
         }
 
-        public void EjecutarDemo92(List<Producto> canasta)
+        public void MenuAplicacionRecursiva(List<Producto> canasta)
         {
             int subOpcion;
             do
