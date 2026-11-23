@@ -40,7 +40,9 @@ namespace Modelo_Proyecto_Grupal
             Console.ResetColor();
         }
 
-        private Producto BuscarEnCatalogo(string codigo)
+        public IReadOnlyList<Producto> Catalogo => PRIVcatalogo.AsReadOnly();
+
+        public Producto BuscarEnCatalogo(string codigo)
         {
             return PRIVcatalogo.Find(p => p.Codigo.Equals(codigo, StringComparison.OrdinalIgnoreCase));
         }

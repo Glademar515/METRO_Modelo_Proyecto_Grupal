@@ -96,5 +96,15 @@ namespace Modelo_Proyecto_Grupal
             Console.WriteLine("---------------------------------------------------------------------");
             Console.WriteLine($"RECAUDACIÓN TOTAL EN CAJA: S/ {totalCaja:F2}");
         }
+        public const double TasaIgv = 0.18;
+        public IReadOnlyList<TransaccionCaja> Transacciones => _transacciones.AsReadOnly();
+
+        public void RegistrarTransaccion(TransaccionCaja transaccion)
+        {
+            if (transaccion != null)
+            {
+                _transacciones.Add(transaccion);
+            }
+        }
     }
 }

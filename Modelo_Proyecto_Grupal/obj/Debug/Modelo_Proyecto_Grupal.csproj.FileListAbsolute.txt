@@ -19,3 +19,5 @@ C:\Users\USER\Downloads\Modelo_Proyecto_Grupal08_METRO-master\Modelo_Proyecto_Gr
 C:\Users\USER\Downloads\Modelo_Proyecto_Grupal08_METRO-master\Modelo_Proyecto_Grupal08_METRO-master\Modelo_Proyecto_Grupal\obj\Debug\Modelo_Proyecto_Grupal.csproj.CoreCompileInputs.cache
 C:\Users\USER\Downloads\Modelo_Proyecto_Grupal08_METRO-master\Modelo_Proyecto_Grupal08_METRO-master\Modelo_Proyecto_Grupal\obj\Debug\Modelo_Proyecto_Grupal.exe
 C:\Users\USER\Downloads\Modelo_Proyecto_Grupal08_METRO-master\Modelo_Proyecto_Grupal08_METRO-master\Modelo_Proyecto_Grupal\obj\Debug\Modelo_Proyecto_Grupal.pdb
+C:\Users\USER\Downloads\Modelo_Proyecto_Grupal08_METRO-master\Modelo_Proyecto_Grupal08_METRO-master\Modelo_Proyecto_Grupal\obj\Debug\Modelo_Proyecto_Grupal.FormPrincipal.resources
+C:\Users\USER\Downloads\Modelo_Proyecto_Grupal08_METRO-master\Modelo_Proyecto_Grupal08_METRO-master\Modelo_Proyecto_Grupal\obj\Debug\Modelo_Proyecto_Grupal.csproj.GenerateResource.cache

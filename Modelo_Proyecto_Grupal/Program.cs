@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 //MAIN DEL SISTEMA
 namespace Modelo_Proyecto_Grupal
 {
@@ -23,6 +24,7 @@ namespace Modelo_Proyecto_Grupal
             Console.Clear();
         }
 
+        [STAThread]
         static void Main(string[] args)
         {
             ValidadorSeguridad validador = new ValidadorSeguridad();
@@ -48,6 +50,7 @@ namespace Modelo_Proyecto_Grupal
                 Console.WriteLine("8. Ver reporte de auditoría");
                 Console.WriteLine("9. Probar funciones recursivas");
                 Console.WriteLine("10. Probar aplicación recursiva");
+                Console.WriteLine("11. Abrir interfaz Windows Forms");
                 Console.WriteLine("0. Salir");
                 Console.Write("Seleccione opción: ");
 
@@ -89,6 +92,11 @@ namespace Modelo_Proyecto_Grupal
                         break;
                     case 10:
                         funcionesRecursivas.MenuAplicacionRecursiva(gestorCanasta.Canasta);
+                        break;
+                    case 11:
+                        Application.EnableVisualStyles();
+                        Application.SetCompatibleTextRenderingDefault(false);
+                        Application.Run(new FormPrincipal());
                         break;
                     case 0:
                         Console.WriteLine("Saliendo del sistema...");
