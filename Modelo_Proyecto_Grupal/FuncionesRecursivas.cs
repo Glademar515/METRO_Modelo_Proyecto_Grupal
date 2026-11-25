@@ -9,7 +9,6 @@ namespace Modelo_Proyecto_Grupal
 {
     public class FuncionesRecursivas
     {
-        // --- 9.1 Funciones recursivas ---
 
         public long Factorial(int numero)
         {
@@ -51,7 +50,6 @@ namespace Modelo_Proyecto_Grupal
             return numero + Sumatoria(numero - 1);
         }
 
-        // --- 9.2 Aplicación (recorridos, búsquedas y conteos) ---
 
         public void RecorrerCanastaRecursivo(List<Producto> canasta, int indice = 0)
         {
@@ -91,7 +89,6 @@ namespace Modelo_Proyecto_Grupal
             return canasta[indice].Cantidad + ContarUnidadesRecursivo(canasta, indice + 1);
         }
 
-        // --- Métodos de prueba para consola ---
 
         private void MostrarMensajeInvalidoYResetear()
         {
